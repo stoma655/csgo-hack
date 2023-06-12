@@ -1,0 +1,25 @@
+{
+  "name": "Spotify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "asynckeystate": "0.0.5",
+    "colors": "^1.4.0",
+    "ffi": "^2.3.0",
+    "hwid": "^0.2.1",
+    "memoryjs": "^3.2.3",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
+    "util": "^0.12.1"
+  },
+  "devDependencies": {
+    "electron": "^4.0.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC"
+}

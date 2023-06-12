@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "memoryjs": "^3.5.1"
+    "electron": "^4.0.3",
+    "hwid": "^0.2.1",
+    "memoryjs": "^3.5.1",
+    "node-fetch": "^2.6.11"
   }
 }

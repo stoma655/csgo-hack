@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helium</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section class="login">
+      <span class="name">Traitor</span>
+      <div class="drag-panel" style="-webkit-app-region: drag"></div>
+      <div class="controls">
+        <button class="minimize"></button>
+        <button class="close"></button>
+      </div>
+        <!-- <img src="img/401.jpg" alt=""> -->
+        <div class="input_wrap">
+            <input class="key" type="text" id="key" placeholder="key">
+            <label for="key"></label>
+        </div>
+
+        <div class="center-center">
+          <a class="btn-glitch-fill">
+            <span class="text">// Initialize</span><span class="text-decoration">_</span><span class="decoration">&rArr;</span>
+          </a>
+        </div>
+
+    </section>
+
+    <script src="main.js"></script>
+    <script>
+
+// const rp = require('request-promise');
+// const memoryjs = require('memoryjs');
+// const Core = require('./code/core');
+const remote = require('electron').remote;
+const { getHWID } = require('hwid');
+// const host = 'http://localhost:3000/';
+const host = 'https://axios-macro.com/';
+
+let closeBtn = document.querySelector('.controls .close');
+let minimizeBtn = document.querySelector('.controls .minimize')
+let initBtn = document.querySelector('.btn-glitch-fill');
+let keyInput = document.querySelector('.input_wrap input.key');
+
+if (localStorage.getItem('key') !== null) {
+  keyInput.value = localStorage.getItem('key');
+}
+
+initBtn.addEventListener('click', function() {
+  if (keyInput.value !== '') {
+    localStorage.setItem('key', keyInput.value);
+    getHWID().then(id => {
+      fetch(host + 'csgo/auth', {
+        method: 'POST',
+        body: JSON.stringify({hash: keyInput.value, hwid: id}),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+      }).then((response) => {
+        return response.json();
+      }).then((data) => {
+        console.log(data);
+        if (data.status == true) {
+          init();
+        } else {
+          alert(data.message);
+        }
+      });
+    });
+
+  }
+  // init()
+
+});
+
+closeBtn.addEventListener('click', function() {
+  let window = remote.getCurrentWindow();
+  window.close();
+});
+
+minimizeBtn.addEventListener('click', function() {
+  let window = remote.getCurrentWindow();
+  window.minimize();
+});
+
+
+function ok() {
+  initBtn.querySelector('span.text').innerText = 'Done ✓';
+  initBtn.querySelector('span.decoration').innerText = '';
+};
+
+
+
+
+    </script>
+</body>
+</html>
